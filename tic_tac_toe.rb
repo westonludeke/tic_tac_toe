@@ -9,15 +9,13 @@
 
 =end
 
-require 'pry'
-
 WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] + # rows
                 [[1, 4, 7], [2, 5, 8], [3, 6, 9]] + # columns
                 [[1, 5, 9], [3, 5, 7]] # diagonals
 INITIAL_MARKER = ' '
 PLAYER_MARKER = 'X'
 COMPUTER_MARKER = 'O'
-WINS_NEEDED_TO_WIN_GAME = 1
+WINS_NEEDED_TO_WIN_GAME = 5
 
 keep_score = { 'player_score' => 0, 'computer_score' => 0, \
                'tie_games' => 0, "rounds_played" => 0, "beginner" => "" }
