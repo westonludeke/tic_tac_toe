@@ -1,5 +1,17 @@
 # Tic Tac Toe
-###*A game of Tic Tac Toe in Ruby.*
+### *A game of Tic Tac Toe in Ruby.*
+
+## About:
+
+This program is a Tic Tac Toe game in Ruby and was built as part of the Launch School RB101 course. The initial logic of displaying the board and both users making selections was designed by the Launch School teachers. 
+
+As part of the course, my role was to develop the following logic:
+
+* Keeping score at the end of each round.
+* The ability to have multiple rounds needed to win the game.
+* The computer making smart selections, including both going for the win and blocking the player from winning.
+* Alternating which user (player or computer) begin the round.
+* Repeating the game after a winner is declared.
 
 
 ## Game Notes:
@@ -21,15 +33,3 @@ The computer will always make the most optimal selection for the computer to win
 4. **Computer Random Selection** - If none of the above are available options for the computer, the computer will simply make a random selection on the board.
 
 At the end of the game, there is an option to play again which resets the scores.
-
-## About:
-
-This Ruby game was built as part of the Launch School RB101 course. The initial logic of displaying the board and both users making selections was designed by the Launch School teachers. 
-
-As part of the course, my role was to develop the following logic:
-
-* Keeping score at the end of each round.
-* The ability to have multiple rounds needed to win the game.
-* The computer making smart selections, including both going for the win and blocking the player from winning.
-* Alternating which user (player or computer) begin the round.
-* Repeating the game after a winner is declared.
