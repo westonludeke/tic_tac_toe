@@ -1,29 +1,28 @@
 # Tic Tac Toe
-##### *A game of Tic Tac Toe in Ruby*
+##### *A game of Tic Tac Toe written in Ruby*
 
-[//]: <> (beginning image)
 ![beginning_image](https://i.imgur.com/SEKGEa2.png)
 
 ### About:
 
 This program is a Tic Tac Toe game in Ruby and was built as part of the Launch School RB101 course. The initial logic of displaying the board and both users making selections was designed by the Launch School teachers. 
 
-As part of the course, my role was to develop the following logic:
+As part of the course, my role was to develop the following logic and add it to the game:
 
 * Keeping score at the end of each round.
 * The ability to have multiple rounds needed to win the game.
 * The computer making smart selections, including both going for the win and blocking the player from winning.
-* Alternating which user (player or computer) begin the round.
-* Repeating the game after a winner is declared.
+* Alternating which user (player or computer) begins the current round.
+* Asking the player if they'd like to repeat the game after a winner is declared.
 
 
 ### Game Notes:
 
-This version of Tic Tac Toe is only in Ruby and there is no front end. In order to play the game, you will need to download the file and run the Ruby program from the command line.
+This version of Tic Tac Toe is written in Ruby and there is no front end. In order to play the game, you will need to download the file and run the Ruby program from the command line.
 
-The game is designed for the player and the computer to alternate who starts each round. At the end of the round, there will be one of three outcomes: The player wins, the computer wins, or there is a tie. The terminal will keep score and also a total number of rounds played.
+The game is designed for the player and the computer to alternate who begins each round. At the end of the round, there will be one of three outcomes: The player wins, the computer wins, or there is a tie. The program will keep score and also a total number of rounds played, both shown in the terminal.
 
-The first person to win 5 rounds wins the game. This can be adjusted in the "WINS_NEEDED_TO_WIN_GAME" constant if you'd like to play less rounds or more rounds.
+As a default, the first person to win 5 rounds wins the game. This number can be adjusted in the "WINS_NEEDED_TO_WIN_GAME" constant if you'd like to play less rounds or more rounds.
 
 The computer will always make the most optimal selection for the computer to win the round. The computer's logic is designed to always make it's selection in the following order:
 
@@ -38,3 +37,5 @@ The computer will always make the most optimal selection for the computer to win
 At the end of the game, there is an option to play again which resets the scores.
 
 ![end_game_image](https://i.imgur.com/9xqOKfD.png)
+
+[The original code with full commit history can be viewed here](https://github.com/westonludeke/launch_school_rb101/blob/master/6_lesson/tic_tac_toe.rb).
