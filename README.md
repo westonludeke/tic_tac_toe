@@ -1,7 +1,9 @@
 # Tic Tac Toe
-##### A game of Tic Tac Toe in Ruby.
+##### *A game of Tic Tac Toe in Ruby*
 
-## About:
+![image](https://i.imgur.com/SEKGEa2.png)
+
+### About:
 
 This program is a Tic Tac Toe game in Ruby and was built as part of the Launch School RB101 course. The initial logic of displaying the board and both users making selections was designed by the Launch School teachers. 
 
@@ -14,7 +16,7 @@ As part of the course, my role was to develop the following logic:
 * Repeating the game after a winner is declared.
 
 
-## Game Notes:
+### Game Notes:
 
 This version of Tic Tac Toe is only in Ruby and there is no front end. In order to play the game, you will need to download the file and run the Ruby program from the command line.
 
