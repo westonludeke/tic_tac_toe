@@ -1,7 +1,8 @@
 # Tic Tac Toe
 ##### *A game of Tic Tac Toe in Ruby*
 
-![image](https://i.imgur.com/SEKGEa2.png)
+[//]: <> (beginning image)
+![beginning_image](https://i.imgur.com/SEKGEa2.png)
 
 ### About:
 
@@ -35,3 +36,5 @@ The computer will always make the most optimal selection for the computer to win
 4. **Computer Random Selection** - If none of the above are available options for the computer, the computer will simply make a random selection on the board.
 
 At the end of the game, there is an option to play again which resets the scores.
+
+![end_game_image](https://i.imgur.com/9xqOKfD.png)
