@@ -1,5 +1,5 @@
 # Tic Tac Toe
-*A game of Tic Tac Toe in Ruby.*
+###*A game of Tic Tac Toe in Ruby.*
 
 
 ## Game Notes:
