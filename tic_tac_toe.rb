@@ -9,6 +9,8 @@
 
 =end
 
+require 'pry'
+
 WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] + # rows
                 [[1, 4, 7], [2, 5, 8], [3, 6, 9]] + # columns
                 [[1, 5, 9], [3, 5, 7]] # diagonals
@@ -51,20 +53,17 @@ def display_board(brd)
 end
 # rubocop:enable Metrics/MethodLength, Metrics/AbcSize
 
-# This creates a new, empty board to start the round
-def initialize_board
+def create_new_empty_board
   new_board = {}
   (1..9).each { |num| new_board[num] = INITIAL_MARKER }
   new_board
 end
 
-# This makes all of the squares on the board empty
-def empty_squares(brd)
+def clear_out_board_squares(brd)
   brd.keys.select { |num| brd[num] == INITIAL_MARKER }
 end
 
-# This method cleans up the prompt, listing the empty squares available.
-def joinor(arr, punc = ", ", or_and = "or")
+def clean_up_prompt(arr, punc = ", ", or_and = "or")
   new_arr = []
   arr.map!(&:to_s)
   last = arr.pop
@@ -82,29 +81,30 @@ def joinor(arr, punc = ", ", or_and = "or")
   new_arr.join("")
 end
 
-def who_starts(keep_score)
+def who_starts_the_round(keep_score)
   keep_score["beginner"] = if keep_score["rounds_played"].even?
                              'Player'
                            else
                              'Computer'
                            end
 end
-who_starts(keep_score)
+who_starts_the_round(keep_score)
 
 # ---- PLAYER SELECTIONS ----
 def player_places_piece!(brd)
   square = ''
   loop do
-    prompt "Player, choose a square: #{joinor(empty_squares(brd))}:"
+    prompt "Player, choose a square: " \
+      "#{clean_up_prompt(clear_out_board_squares(brd))}:"
     square = gets.chomp.to_f
-    break if empty_squares(brd).include?(square) && square % 1 == 0
+    break if clear_out_board_squares(brd).include?(square) && square % 1 == 0
     prompt "Sorry, that's not a valid choice."
   end
   brd[square.to_i] = PLAYER_MARKER
 end
 
 # ---- COMPUTER SELECTIONS ----
-def computer_selects_five(brd)
+def computer_selects_square_five(brd)
   if brd.values_at(5)[0] == ' '
     square = 5
     brd[square] = COMPUTER_MARKER
@@ -121,7 +121,7 @@ def computer_choice(brd, line)
 end
 
 def computer_marks_board(brd)
-  square = empty_squares(brd).sample
+  square = clear_out_board_squares(brd).sample
   brd[square] = COMPUTER_MARKER
 end
 
@@ -144,16 +144,16 @@ def computer_random_choice(brd, keep_score)
 end
 
 # ----- COMPUTER GOES FOR THE WIN ----
-def computer_two_spaces_filled(brd, line)
+def computer_about_to_win(brd, line)
   brd.values_at(*line).count(COMPUTER_MARKER) == 2 && \
     brd.values_at(*line).count(PLAYER_MARKER) == 0
 end
 
 def computer_win(brd, line)
-  if computer_two_spaces_filled(brd, line) && \
+  if computer_about_to_win(brd, line) && \
      (x_greater_than_o(brd))
     computer_choice(brd, line)
-  elsif computer_two_spaces_filled(brd, line) && \
+  elsif computer_about_to_win(brd, line) && \
         (x_even_with_o(brd))
     computer_choice(brd, line)
   end
@@ -187,7 +187,7 @@ def rounds_played_odd(brd, line)
   end
 end
 
-def computer_blocks_player(brd, keep_score)
+def computer_blocks_player_from_victory(brd, keep_score)
   WINNING_LINES.each do |line|
     if player_one_square_away(brd, line)
       if keep_score["rounds_played"].even?
@@ -198,18 +198,17 @@ def computer_blocks_player(brd, keep_score)
     end
   end
 end
-# ----
 
 def computer_places_piece!(brd, keep_score)
-  computer_selects_five(brd)
+  computer_selects_square_five(brd)
   computer_seals_victory(brd, keep_score)
-  computer_blocks_player(brd, keep_score)
+  computer_blocks_player_from_victory(brd, keep_score)
   computer_random_choice(brd, keep_score)
   display_board(brd)
 end
 
 def board_full?(brd)
-  empty_squares(brd).empty?
+  clear_out_board_squares(brd).empty?
 end
 
 def someone_won?(brd)
@@ -271,7 +270,7 @@ def selection_loop(board, keep_score)
   display_board(board)
 end
 
-def winner_round_prompt(board, keep_score)
+def display_winner_round_prompt(board, keep_score)
   prompt "The #{detect_winner(board)} won this round!"
   if detect_winner(board) == 'Player'
     keep_score['player_score'] += 1
@@ -300,7 +299,7 @@ def display_end_round_prompt(keep_score)
   "The computer has #{keep_score['computer_score']} wins. " \
   "There have been #{keep_score['tie_games']} ties. "
   prompt "The next round will begin soon!"
-  who_starts(keep_score)
+  who_starts_the_round(keep_score)
 end
 
 def end_round_score_update(keep_score)
@@ -325,24 +324,24 @@ def winner_check(keep_score)
   end
 end
 
-def play(keep_score)
+def play_the_game(keep_score)
   until winner_check(keep_score) != false
     beginning_round_prompt(keep_score)
-    board = initialize_board
+    board = create_new_empty_board
     selection_loop(board, keep_score)
 
     if someone_won?(board)
-      winner_round_prompt(board, keep_score)
+      display_winner_round_prompt(board, keep_score)
     else
       display_tie_round_prompt(keep_score)
     end
     end_round_score_update(keep_score)
     score_check(keep_score)
   end
-  play_again(keep_score)
+  end_game_prompt(keep_score)
 end
 
-def play_again(keep_score)
+def end_game_prompt(keep_score)
   keep_score["rounds_played"] = 0
   prompt "Would you like to play again? (y or n)"
   answer = gets.chomp
@@ -350,10 +349,10 @@ def play_again(keep_score)
     keep_score['player_score'] = 0
     keep_score['computer_score'] = 0
     keep_score['tie_games'] = 0
-    play(keep_score)
+    play_the_game(keep_score)
   else
     prompt "Thanks for playing Tic Tac Toe! Goodbye!"
   end
 end
 
-play(keep_score)
+play_the_game(keep_score)
